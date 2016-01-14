@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">>
+<head>
+  　 <meta charset="UTF-8">
+	<title>原型模式</title>
+</head>
+<body>
+<script type="text/javascript">
+
+  var  myObj={name:"2",sex:"女",hobby:['吃饭','逛街','学习']};
+  
+  //创建对象的原型  浅复制
+  var myObjCopy=Object.create(myObj);
+
+  myObjCopy.hobby[0]='吃饭1';
+
+  console.info(myObj);//改变了
+  console.info(myObjCopy);//也改变了
+
+  //Object.create(obj) 返回新创建的对象，该对象的原型指向obj,浅复制
+
+  function Person(){
+       this.name='小吕';
+       this.getName=function(){
+       	  return this.name;
+       }
+  }
+
+  function Student(){
+       this.getName=function(){
+       	console.info(3);
+       	 return this.name;
+       }
+  }
+  Student.prototype=new Person();
+
+
+  var student=new Student();
+
+  Student.prototype.name='小周';//原型是所有对象公用的部分，它改变其他对象都改变
+
+   var student1=new Student();
+   student1.getName();//先用自己的，自己没有再搜索原型；
+
+   
+
+
+</script>
+</body>
+</html>

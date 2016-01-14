@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    name.replace(/\b\w+\b/g, function(word){
+        console.info(word);
+        return word.substring(0,1).toUpperCase()+word.substring(1);}
+    );
+    function  test1(invokeFun){
+         invokeFun(1,2,3);
+    }
+    function test2(a,b){
+        var c=a+b;
+        return function (a1,b1,c1){
+            console.info(c+b1+c1);
+        }
+    }
+
+   // test1(test2(1,2));
+ (function (WIN,DOC){
+
+
+         function Slip(ele,direc){
+             this.ele=ele;
+             this.direc=direc;
+             console.info(ele+" "+direc);
+         }
+         Slip.prototype.init=function(){
+             return this;
+         }
+         Slip.prototype.start=function(){
+             console.info('start');
+             return this;
+         }
+
+
+    function entry(ele,doc){
+         return new Slip(ele,doc).init();
+     }
+     WIN['Slip']=entry;
+
+})(window,document);
+
+Slip(3,1).start();
+
+
+</script>
+</body>
+</html>

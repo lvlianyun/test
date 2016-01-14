@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="fromApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://code.angularjs.org/angular-1.0.1.min.js"></script>
+</head>
+<body>
+<div ng-controller="formController">
+    <form name="registerForm" novalidate ng-submit="submitForm()">
+        <div>
+            <label for="mobile">手机号码:</label>
+            <input type="text" id="mobile" name="mobile" ng-model="user.mobile" ng-pattern="/1[345878]\d{9}$/"  />
+            <label ng-show="registerForm.mobile.$dirty&&registerForm.mobile.$invalid">手机号码输入错误</label>
+        </div>
+        <div>
+            <label for="username">用户名{{registerForm.mobile.$error}}:</label>
+            <input type="text" id="username" name="username" ng-model="user.username" ng-pattern="/\w{2}\d{3}$/" >
+            <label ng-show="registerForm.username.$dirty&&registerForm.username.$invalid">请输入用户名</label>
+        </div>
+        <input type="submit" ng-disabled="registerForm.$invalid" value="注册"/>
+    </form>
+
+</div>
+<script>
+    var app= angular.module('fromApp',[]);
+
+    app.controller('formController',function($scope){
+         
+         $scope.user={};
+         
+         $scope.submitForm=function(){
+               console.info($scope.user);
+         }
+
+        
+    });
+</script>
+</body>
+</html>

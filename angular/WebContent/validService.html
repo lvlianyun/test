@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+.labelerror{
+	font-size: 14px;
+	display: inline;
+	padding-left: 30px;
+	color:red;
+	background: url(./assets/images/error.png) left center no-repeat;
+}
+</style>
+<body ng-controller="RegisterController">
+<div>
+    <form name="registerForm" novalidate>
+        <div>
+            <label for="mobile">手机号码:</label>
+            <input type="text" id="mobile" name="mobile" ng-model="user.mobile" />
+            <label ng-show="validater._fieldMsg['user.mobile'].msg" class="labelerror">{{validater._fieldMsg['user.mobile'].msg}}</label>
+        </div>
+        <div>
+            <label for="username">用户名:</label>
+            <input type="text" id="username" name="username" ng-model="user.username" >
+            <label ng-show="validater._fieldMsg['user.username'].msg" class="labelerror">{{validater._fieldMsg['user.username'].msg}}</label>
+        </div>
+        <input type="submit" ng-disabled="!validater.isValid()" value="注册"/>
+    </form>
+
+</div>
+<script src="./assets/js/seajs/2.2.1/sea.js" id="seajsnode"></script>
+<script src="./common/sea-config.js"></script>
+<script>
+	// 追加模块相关配置
+	seajs.config({	   
+	    vars: {
+	        appName: 'indexApp'
+	    }
+	});
+    // 加载入口模块
+    
+    seajs.use('./register/run');
+</script>
+</body>
+</html>

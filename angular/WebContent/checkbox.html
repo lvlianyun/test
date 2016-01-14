@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="fromApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://code.angularjs.org/angular-1.0.1.min.js"></script>
+</head>
+<body>
+<div ng-controller="formController">
+    <div class="form-group">
+         <table>
+             <th>特惠编号</th>
+             <th>投资额度</th>
+             <th>有效日期</th>
+             <tr ng-repeat="product in fromData">
+                  <td>
+                      <label class="checkbox-inline">
+                           <input type="checkbox" name="pid" value="{{product.id}}"  ng-model="selectData[$index]" ng-click="setValue(product.id,$index)">{{product.id}}
+                      </label>
+                  </td>
+                  <td>{{product.limitAmount}}</td>
+                  <td>{{product.date}}</td>
+
+             </tr>
+         </table>
+
+
+    </div>
+    <span>{{selectData}}</span>
+    <span>{{selectPidArray}}</span>
+
+</div>
+<script>
+    var app= angular.module('fromApp',[]);
+    app.controller('formController',function($scope){
+
+         function getIndexByValue(arr,val) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] == val) {
+                    return i;
+                }
+            }
+            return -1;
+        };
+        function  removeValue (arr,val) {
+            var index = getIndexByValue(arr,val);
+            if (index > -1) {
+                arr.splice(index, 1);
+            }
+        };
+        $scope.fromData=[{
+            "id":111,
+            "date":"2015-12-11",
+            "limitAmount":1301
+        },{
+            "id":112,
+            "date":"2015-12-12",
+            "limitAmount":1302
+        },{
+            "id":113,
+            "date":"2015-12-13",
+            "limitAmount":1303
+        },{
+            "id":114,
+            "date":"2015-12-14",
+            "limitAmount":1304
+        }]
+        $scope.selectData=new Array( $scope.fromData.length);
+        $scope.selectPidArray=[];
+        $scope.setValue=function(pid,index){
+             if($scope.selectData[index]){
+                 $scope.selectPidArray.push(pid);
+             }else{
+                 removeValue($scope.selectPidArray,pid);
+             }
+        }
+    });
+</script>
+
+</body>
+</html>

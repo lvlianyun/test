@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="fromApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://code.angularjs.org/angular-1.0.1.min.js"></script>
+</head>
+<body ng-controller="FormController">
+<input ng-model="name" /> {{number}}
+<input type="text" ng-model="color" />
+<div hellow-world  color1='color'></div>
+<script>
+    angular.bootstrap(document,[]);
+
+    var app= angular.module('fromApp',[]);
+
+   /*
+       1.  scope = true   子继承父 不能改变父
+       2.  scope = false  子继承父  能改变父 默认为false
+       3.  scope :{
+              color[当前节点里面的变量名]:&【&表示为父类中的值；= 】color[当前节点的属性名]
+          } 隔离
+       5.compile 和 link 冲突，  不能兼容  有compile 函数 link 不执行
+
+
+   */
+    app.controller('FormController',['$scope',function($scope){
+        $scope.color="green";
+        $scope.number='111 ';
+    }]);
+    app.directive('hellowWorld',['$location' ,function($location){
+          return {
+            /*  scope:{
+                  color:'=',//自定义节点上面必须定义自己的属性color1
+
+              },*/
+              restrict:'A',
+              replace:true,
+
+              template:'<div style="background-color:{{color}};font-size:12px;">元旦快乐</div>',
+              controller:function($scope,$element){
+                  $scope.number = $scope.number + "222 ";
+                  //$element 必须这样写  表示当前元素
+                  $scope.name="吕连云";
+              },
+              link:function(scope,element,attrs){
+                  scope.number = scope.number + "3333 ";
+                  // scope.color="orange";
+                  //element.css('background-color',scope.color);
+              }/*,
+              compile: function(element, attributes) {
+                  return {
+                      pre: function preLink(scope, element, attributes) {
+                          scope.number = scope.number + " 44444 ";
+                      },
+                      post: function postLink(scope, element, attributes) {
+                          scope.number = scope.number + " 55555 ";
+                      }
+                  };
+              }*/
+          }
+    }]);
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">>
+<head>
+    <meta charset="utf-8">
+	<title>单例模式</title>
+	
+</head>
+<body>
+
+<script type="text/javascript">
+
+    // 单例模式1
+	var single={
+    
+         init:function() {
+
+         	this.render();
+         	this.bind();
+         	
+         },
+         render:function(){
+
+         	this.btn=$("#button");
+
+         },
+         bind:function(){
+
+         	this.btn.click=function(){
+
+         	}
+
+         }
+
+
+	}
+
+	// 单例模式2
+	var single2=(function(){
+
+		 return {
+
+		 	init:function(){
+
+		 		console.info(33);
+		 	}
+		 }
+	})();
+
+
+</script>
+</body>
+</html>
+
