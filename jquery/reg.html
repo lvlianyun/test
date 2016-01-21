@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正则表达式的学习</title>
+</head>
+<body>
+<script>
+  /*  var reg= /\d+/g;
+    var str="sdfsa";
+     var result=reg.exec(str);
+    console.info(result);*/
+
+  /**
+   * 1.正则表达式 有 3个方法
+   * a.  exec 匹配到结果返回数组  ，没有匹配返回null
+   * b.  test 返回true false;
+   * c. compile
+   *
+   *
+   * 2 .字符串支持正则的方法有
+   *
+   * a.search（reg or str）  返回字符串匹配的位置  没有找到返回-1
+   * b.match(reg or str)  返回匹配的数组(正则必须要加g 才返回数组否则返回   )
+   * c.replace(reg or substr,replacement)
+   * d.split(reg or str) 返回数组
+   *
+   */
+
+    var str = "Visit W3School, W3School is a place to study web technology.";
+    var patt = new RegExp("W3School","g");
+    var result=patt.exec(str);
+    var restul1 = patt.test(str);
+    console.info(result);//返回["W3School", index: 6, input: "Visit W3School, W3School is a place to study web technology."]
+    console.info(restul1);//返回true
+
+
+    var str1= "323 sfs 33";
+  //正则添加/g
+    var reg1 =/\d+/g;//添加
+    var result2= str1.match(reg1);
+    console.info(result2);//返回["323", "33"]
+  //正则不加添加g
+   reg1 =/\d+/;//
+   result2= str1.match(reg1);
+   console.info(result2);//返回["323", index: 0, input: "323 sfs 33"]
+
+    var reg2=/\d+/g;
+    var str2="sdfsd333sfdasd2222";
+    var result3=str2.replace(reg2,'1111');//返回新的结果  str2 不改变
+    console.info(result3);//sdfsd1111sfdasd1111
+
+</script>
+
+</body>
+</html>
